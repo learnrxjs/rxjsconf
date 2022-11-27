@@ -1,4 +1,4 @@
 export * from "./header"
-export * from "./Icon"
+export * from "./icon"
 export * from "./i18n"
 export * from "./footer"

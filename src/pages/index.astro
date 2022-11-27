@@ -1,7 +1,8 @@
 ---
 import { Footer, Header, i18n, Icon } from "../components";
+import { Heading } from "../components/heading";
 import Layout from "../layouts/Dumb.astro"
-import { formatScheduleTime } from "../lib";
+import { formatScheduleTime, getSpeakerFullName } from "../lib";
 import { getSchedule, Speaker, speakers, UNKNOWN_SPEAKER } from "../static"
 
 const schedule = getSchedule()
@@ -26,18 +27,21 @@ const schedule = getSchedule()
   
           <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight">Онлайн конференция по RxJS</h1>
   
-          <p class="text-lg text-slate-600 max-w-xl">Собираемся вместе, чтобы делиться знаниями</p>
+          <p class="text-lg text-slate-600 max-w-xl">Собираемся вместе, чтобы делиться знаниями и опытом. <br /> Подпишитесь на наш телеграм канал, чтобы быть в курсе всего.</p>
   
           <div>
-            <button class="button">Зарегистрироваться</button>
+            <a href="https://t.me/rxjsconf" class="button sm:w-fit justify-center sm:justify-start no-underline bg-primary hover:bg-primary/70 flex items-center gap-2">
+              <div class="w-4"><Icon name="telegram" /></div>
+              <span>Подписаться</span>
+            </a>
           </div>
         </div>
       </div>
     </section>
   
-    <section id="schedule">
+    <section>
       <div class="wrap">
-        <h2 class="text-3xl font-bold">Расписание</h2>
+        <h2 id="schedule" class="text-3xl font-bold">Расписание</h2>
         
         <ul class="text-xl divide-y">
           {
@@ -50,18 +54,50 @@ const schedule = getSchedule()
               }
   
               return <li class="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-4">
-                <time datetime={row.time.toISOString()}>{ formatScheduleTime(row.time) }</time>
+                <time id={ formatScheduleTime(row.time) } datetime={row.time.toISOString()}>{ formatScheduleTime(row.time) }</time>
               
-                <div class="flex-grow">
-                  <h3 class="text-2xl font-bold mb-2">{ row.talk.title }</h3>
+                <div class="flex-grow flex flex-col gap-2">
+                  <h3 id={ row.talk.id } class="text-2xl font-bold">{ row.talk.title }</h3>
+                  
                   <p class="text-base" set:html={ row.talk.description }></p>
+                  
+                  {
+                    row.talk.slidesUrl !== null && row.talk.videoUrl !== null && <ul class="text-base flex gap-4">
+                      {
+                        row.talk.slidesUrl !== null && <li>
+                          <a class="flex items-center gap-1" target="_blank" download href={ row.talk.slidesUrl }>
+                            <div class="w-4"><Icon name="pdf" /></div>
+                            <span>Слайды</span>
+                          </a>
+                        </li>
+                      }
+                      {
+                        row.talk.videoUrl !== null && <li>
+                          <a class="flex items-center gap-1" target="_blank" href={ row.talk.videoUrl }>
+                            <div class="w-4"><Icon name="youtube" /></div>
+                            <span>Запись</span>
+                          </a>
+                        </li>
+                      }
+                    </ul>
+                  }
+
+                  {
+                    false && <a
+                      href={`/feedback?type=speaker&id=${ row.speaker.id }`}
+                      target="_blank"
+                      class="button text-base md:text-xs no-underline"
+                    >Оставить отзыв</a>
+                  }
                 </div>
       
                 {
                   row.speaker.id !== UNKNOWN_SPEAKER && <div class="flex flex-col gap-2">
                     <img class="rounded min-w-[150px] max-w-[150px]" src={ row.speaker.avatarUrl } alt="" />
                     <div>
-                      <p>{ row.speaker.firstName }</p>
+                      <p>
+                        <a href={`/#${ row.speaker.id }`}>{ getSpeakerFullName(row.speaker) }</a>  
+                      </p>
                       <p class="text-black/50 text-sm">{ row.speaker.job }</p>
                     </div>
                   </div>
@@ -85,7 +121,7 @@ const schedule = getSchedule()
   
     <section>
       <div class="wrap">
-        <h2 class="text-3xl font-bold">Докладчики</h2>
+        <h2 id="speakers" class="text-3xl font-bold">Докладчики</h2>
   
         <ul class="divide-y">
           {
@@ -98,7 +134,7 @@ const schedule = getSchedule()
                     <img class="rounded min-w-[150px] max-w-[150px]" src={ speaker.avatarUrl } alt="" />
                   </figure>
                   <div class="flex flex-col gap-2">
-                    <h3 class="text-2xl font-bold">{ speaker.firstName }</h3>
+                    <h3 id={ speaker.id } class="text-2xl font-bold">{ getSpeakerFullName(speaker) }</h3>
                     <p class="text-black/50">{ speaker.job }</p>
                     <p set:html={ speaker.bio }></p>
                     
@@ -123,12 +159,6 @@ const schedule = getSchedule()
         </ul>
       </div>
     </section>
-  
-    <!-- <section class="mb-4">
-      <div class="wrap">
-        <h2 class="text-3xl font-bold">Организаторы</h2>
-      </div>
-    </section> -->
   
     <Footer client:idle />
   </div>
