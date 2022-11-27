@@ -1,5 +1,5 @@
 ---
-import { Footer, Header, i18n, Icon } from "../components";
+import { Footer, Header, i18n, Icon, YoutubeVideo } from "../components";
 import { Heading } from "../components/heading";
 import Layout from "../layouts/Dumb.astro"
 import { formatScheduleTime, getSpeakerFullName } from "../lib";
@@ -29,15 +29,25 @@ const schedule = getSchedule()
   
           <p class="text-lg text-slate-600 max-w-xl">Собираемся вместе, чтобы делиться знаниями и опытом. <br /> Подпишитесь на наш телеграм канал, чтобы быть в курсе всего.</p>
   
-          <div>
+          <div class="flex flex-col gap-4">
             <a href="https://t.me/rxjsconf" class="button sm:w-fit justify-center sm:justify-start no-underline bg-primary hover:bg-primary/70 flex items-center gap-2">
               <div class="w-4"><Icon name="telegram" /></div>
               <span>Подписаться</span>
+            </a>
+            <a href="https://t.me/rxjsconf" class="button sm:w-fit justify-center sm:justify-start no-underline bg-[red] hover:bg-[red]/70 flex items-center gap-2">
+              <div class="w-4"><Icon name="youtube" /></div>
+              <span>Смотреть трансляцию</span>
             </a>
           </div>
         </div>
       </div>
     </section>
+
+    <!-- <section>
+      <div class="wrap">
+        <YoutubeVideo id="z_rQ4iS52EY" title="test" client:idle />
+      </div>
+    </section> -->
   
     <section>
       <div class="wrap">
