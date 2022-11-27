@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary-color: 107 70 255;
+  }
+
+  * {
+    @apply outline-none focus:ring-4 ring-primary
+  }
+  
+  a {
+    @apply underline hover:no-underline
+  }
+
+  html {
+    @apply bg-white
+  }
+}
+
+@layer components {
+  .button {
+    @apply text-center text-white bg-black px-4 py-2 rounded hover:bg-black/80
+  }
+}
+
+.wrap {
+  @apply max-w-5xl mx-auto px-5
+}
+
+[data-hidden="true"] {
+  @apply hidden
+}
+
+[data-hidden="false"] {
+  @apply block
+}
+
+html {
+  font-family: system-ui, sans-serif;
+  background-color: #f6f6f6;
+}
+
+code {
+  font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+}
