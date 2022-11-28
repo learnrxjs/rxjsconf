@@ -24,6 +24,34 @@
   .button {
     @apply text-center text-white bg-black px-4 py-2 rounded hover:bg-black/80
   }
+
+  .input {
+    @apply block w-full px-3 py-2 text-[1rem] leading-4 rounded-md border border-gray-300
+  }
+  
+  .label {
+    @apply block text-left
+  }
+
+  .form-field-container {
+    @apply flex flex-col gap-1
+  }
+
+  .alert {
+    @apply fixed top-0 left-1/2 -translate-x-1/2 text-center py-2 px-4 rounded mt-4
+  }
+
+  .alert[data-alert-type="success"] {
+    @apply bg-green-400 text-black
+  }
+
+  .alert[data-alert-type="error"] {
+    @apply bg-red-500 text-white
+  }
+
+  .alert[data-alert-type="warn"] {
+    @apply bg-yellow-400 text-black
+  }
 }
 
 .wrap {

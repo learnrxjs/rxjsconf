@@ -1,36 +1,45 @@
 ---
-import { Footer, Header, i18n, Icon, YoutubeVideo } from "../components";
-import { Heading } from "../components/heading";
-import Layout from "../layouts/Dumb.astro"
+import { Footer, Header, Icon } from "../components";
+import Layout from "../layouts/Dumb.astro";
 import { formatScheduleTime, getSpeakerFullName } from "../lib";
-import { getSchedule, Speaker, speakers, UNKNOWN_SPEAKER } from "../static"
+import { getSchedule, Speaker, speakers, UNKNOWN_SPEAKER } from "../static";
 
-const schedule = getSchedule()
+const schedule = getSchedule();
 ---
 
 <Layout title="Главная">
   <div class="flex flex-col gap-8 text-lg sm:text-base pb-[68px] lg:pb-0">
     <Header client:load />
-  
+
     <section>
       <div class="wrap grid lg:grid-cols-2 place-items-center p-8">
         <div class="md:order-1 hidden md:block">
-          <img
-            class="w-[420px]"
-            src="/rxjs-conf-logo.svg"
-            alt="RxJS Logo"
-          />
+          <img class="w-[420px]" src="/rxjs-conf-logo.svg" alt="RxJS Logo" />
         </div>
-  
+
         <div class="flex flex-col gap-4 w-full">
-          <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight text-primary">11.12</h1>
-  
-          <h1 class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight">Онлайн конференция по RxJS</h1>
-  
-          <p class="text-lg text-slate-600 max-w-xl">Собираемся вместе, чтобы делиться знаниями и опытом. <br /> Подпишитесь на наш телеграм канал, чтобы быть в курсе всего.</p>
-  
+          <h1
+            class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight text-primary"
+          >
+            11.12
+          </h1>
+
+          <h1
+            class="text-5xl lg:text-6xl xl:text-7xl font-bold lg:tracking-tight"
+          >
+            Онлайн конференция по RxJS
+          </h1>
+
+          <p class="text-lg text-slate-600 max-w-xl">
+            Собираемся вместе, чтобы делиться знаниями и опытом. <br /> Подпишитесь
+            на наш телеграм канал, чтобы быть в курсе всего.
+          </p>
+
           <div class="flex flex-col gap-4">
-            <a href="https://t.me/rxjsconf" class="button sm:w-fit justify-center sm:justify-start no-underline bg-primary hover:bg-primary/70 flex items-center gap-2">
+            <a
+              href="https://t.me/rxjsconf"
+              class="button sm:w-fit justify-center sm:justify-start no-underline bg-primary hover:bg-primary/70 flex items-center gap-2"
+            >
               <div class="w-4"><Icon name="telegram" /></div>
               <span>Подписаться</span>
             </a>
@@ -48,71 +57,109 @@ const schedule = getSchedule()
         <YoutubeVideo id="z_rQ4iS52EY" title="test" client:idle />
       </div>
     </section> -->
-  
+
     <section>
       <div class="wrap">
         <h2 id="schedule" class="text-3xl font-bold">Расписание</h2>
-        
+
         <ul class="text-xl divide-y">
           {
             schedule.map((row) => {
               if (row.type === "BREAK") {
-                return <li id="schedule-10-00" class="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-4">
-                  <time datetime={row.time.toISOString()}>{ formatScheduleTime(row.time) }</time>
-                  <p class="text-gray-500">{ row.title }</p>
-                </li>
+                return (
+                  <li
+                    id="schedule-10-00"
+                    class="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-4"
+                  >
+                    <time datetime={row.time.toISOString()}>
+                      {formatScheduleTime(row.time)}
+                    </time>
+                    <p class="text-gray-500">{row.title}</p>
+                  </li>
+                );
               }
-  
-              return <li class="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-4">
-                <time id={ formatScheduleTime(row.time) } datetime={row.time.toISOString()}>{ formatScheduleTime(row.time) }</time>
-              
-                <div class="flex-grow flex flex-col gap-2">
-                  <h3 id={ row.talk.id } class="text-2xl font-bold">{ row.talk.title }</h3>
-                  
-                  <p class="text-base" set:html={ row.talk.description }></p>
-                  
-                  {
-                    row.talk.slidesUrl !== null && row.talk.videoUrl !== null && <ul class="text-base flex gap-4">
-                      {
-                        row.talk.slidesUrl !== null && <li>
-                          <a class="flex items-center gap-1" target="_blank" download href={ row.talk.slidesUrl }>
-                            <div class="w-4"><Icon name="pdf" /></div>
-                            <span>Слайды</span>
-                          </a>
-                        </li>
-                      }
-                      {
-                        row.talk.videoUrl !== null && <li>
-                          <a class="flex items-center gap-1" target="_blank" href={ row.talk.videoUrl }>
-                            <div class="w-4"><Icon name="youtube" /></div>
-                            <span>Запись</span>
-                          </a>
-                        </li>
-                      }
-                    </ul>
-                  }
 
-                  {
-                    false && <a
-                      href={`/feedback?type=speaker&id=${ row.speaker.id }`}
-                      target="_blank"
-                      class="button text-base md:text-xs no-underline"
-                    >Оставить отзыв</a>
-                  }
-                </div>
-      
-                {
-                  row.speaker.id !== UNKNOWN_SPEAKER && <div class="flex flex-col gap-2">
-                    <img class="rounded min-w-[150px] max-w-[150px]" src={ row.speaker.avatarUrl } alt="" />
-                    <div>
-                      <p>
-                        <a href={`/#${ row.speaker.id }`}>{ getSpeakerFullName(row.speaker) }</a>  
-                      </p>
-                      <p class="text-black/50 text-sm">{ row.speaker.job }</p>
-                    </div>
+              return (
+                <li class="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-4">
+                  <time
+                    id={formatScheduleTime(row.time)}
+                    datetime={row.time.toISOString()}
+                  >
+                    {formatScheduleTime(row.time)}
+                  </time>
+
+                  <div class="flex-grow flex flex-col gap-2">
+                    <h3 id={row.talk.id} class="text-2xl font-bold">
+                      {row.talk.title}
+                    </h3>
+
+                    <p class="text-base" set:html={row.talk.description} />
+
+                    {row.talk.slidesUrl !== null &&
+                      row.talk.videoUrl !== null && (
+                        <ul class="text-base flex gap-4">
+                          {row.talk.slidesUrl !== null && (
+                            <li>
+                              <a
+                                class="flex items-center gap-1"
+                                target="_blank"
+                                download
+                                href={row.talk.slidesUrl}
+                              >
+                                <div class="w-4">
+                                  <Icon name="pdf" />
+                                </div>
+                                <span>Слайды</span>
+                              </a>
+                            </li>
+                          )}
+                          {row.talk.videoUrl !== null && (
+                            <li>
+                              <a
+                                class="flex items-center gap-1"
+                                target="_blank"
+                                href={row.talk.videoUrl}
+                              >
+                                <div class="w-4">
+                                  <Icon name="youtube" />
+                                </div>
+                                <span>Запись</span>
+                              </a>
+                            </li>
+                          )}
+                        </ul>
+                      )}
+
+                    {false && (
+                      <a
+                        href={`/feedback?type=speaker&id=${row.speaker.id}`}
+                        target="_blank"
+                        class="button text-base md:text-xs no-underline"
+                      >
+                        Оставить отзыв
+                      </a>
+                    )}
                   </div>
-                }
-              </li>
+
+                  {row.speaker.id !== UNKNOWN_SPEAKER && (
+                    <div class="flex flex-col gap-2">
+                      <img
+                        class="rounded min-w-[150px] max-w-[150px]"
+                        src={row.speaker.avatarUrl}
+                        alt=""
+                      />
+                      <div>
+                        <p>
+                          <a href={`/#${row.speaker.id}`}>
+                            {getSpeakerFullName(row.speaker)}
+                          </a>
+                        </p>
+                        <p class="text-black/50 text-sm">{row.speaker.job}</p>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              );
             })
           }
         </ul>
@@ -121,55 +168,76 @@ const schedule = getSchedule()
 
     <section>
       <div class="wrap">
-        <div class="bg-black text-white p-8 md:px-20 md:py-20 rounded-lg flex flex-col gap-4 items-center text-center">
+        <div
+          class="bg-black text-white p-8 md:px-20 md:py-20 rounded-lg flex flex-col gap-4 items-center text-center"
+        >
           <h2 class="text-4xl md:text-5xl font-bold">Сообщество</h2>
-          <p class="text-slate-400 text-lg">Конференция подготовлена в рамках телеграм сообщества «RxJS — русскоговорящее сообщество».</p>
-          <a class="button bg-white text-black hover:bg-white/80 no-underline" target="_blank" href="https://t.me/rxjs_ru">Присоединиться к сообществу</a>
+          <p class="text-slate-400 text-lg">
+            Конференция подготовлена в рамках телеграм сообщества «RxJS —
+            русскоговорящее сообщество».
+          </p>
+          <a
+            class="button bg-white text-black hover:bg-white/80 no-underline"
+            target="_blank"
+            href="https://t.me/rxjs_ru">Присоединиться к сообществу</a
+          >
         </div>
       </div>
     </section>
-  
+
     <section>
       <div class="wrap">
         <h2 id="speakers" class="text-3xl font-bold">Докладчики</h2>
-  
+
         <ul class="divide-y">
           {
-            Array
-              .from(speakers.values())
+            Array.from(speakers.values())
               .filter((speaker) => speaker.id !== UNKNOWN_SPEAKER)
               .map((speaker: Speaker) => {
-                return <li class="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-4">
-                  <figure>
-                    <img class="rounded min-w-[150px] max-w-[150px]" src={ speaker.avatarUrl } alt="" />
-                  </figure>
-                  <div class="flex flex-col gap-2">
-                    <h3 id={ speaker.id } class="text-2xl font-bold">{ getSpeakerFullName(speaker) }</h3>
-                    <p class="text-black/50">{ speaker.job }</p>
-                    <p set:html={ speaker.bio }></p>
-                    
-                    {
-                      speaker.socials.length > 0 && <ul class="flex gap-2 flex-wrap">
-                        {
-                          speaker.socials.map((social) => {
-                            return <li class="after:content-['•'] after:ml-2 after:text-black/50 last:after:hidden flex items-center">
-                              <a href={ social.value } class="flex items-center gap-1">
-                                <div class="w-4"><Icon name={ social.type } /></div>
-                                <span>{ social.text }</span>
-                              </a>
-                            </li>
-                          })
-                        }
-                      </ul>
-                    }
-                  </div>
-                </li>
+                return (
+                  <li class="flex flex-col sm:flex-row items-start gap-4 sm:gap-8 py-4">
+                    <figure>
+                      <img
+                        class="rounded min-w-[150px] max-w-[150px]"
+                        src={speaker.avatarUrl}
+                        alt=""
+                      />
+                    </figure>
+                    <div class="flex flex-col gap-2">
+                      <h3 id={speaker.id} class="text-2xl font-bold">
+                        {getSpeakerFullName(speaker)}
+                      </h3>
+                      <p class="text-black/50">{speaker.job}</p>
+                      <p set:html={speaker.bio} />
+
+                      {speaker.socials.length > 0 && (
+                        <ul class="flex gap-2 flex-wrap">
+                          {speaker.socials.map((social) => {
+                            return (
+                              <li class="after:content-['•'] after:ml-2 after:text-black/50 last:after:hidden flex items-center">
+                                <a
+                                  href={social.value}
+                                  class="flex items-center gap-1"
+                                >
+                                  <div class="w-4">
+                                    <Icon name={social.type} />
+                                  </div>
+                                  <span>{social.text}</span>
+                                </a>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      )}
+                    </div>
+                  </li>
+                );
               })
           }
         </ul>
       </div>
     </section>
-  
+
     <Footer client:idle />
   </div>
 </Layout>
