@@ -1,0 +1,14 @@
+---
+import { Footer,Header } from "../components";
+import Layout from "../layouts/Dumb.astro";
+---
+
+<Layout title="Call for Papper">
+  <Header client:load />
+
+  <main>
+    <h2>Feedback</h2>
+  </main>
+
+  <Footer client:idle />
+</Layout>

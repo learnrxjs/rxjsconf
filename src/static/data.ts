@@ -134,5 +134,5 @@ export const SITE_SOCIALS: readonly Readonly<SpeakerSocial>[] = [
   { type: "telegram", value: "https://t.me/rxjsconf", text: "Телеграм" },
   { type: "twitter", value: "https://twitter.com/rxjsconf", text: "Твиттер" },
   { type: "github", value: "https://github.com/learnrxjs", text: "Гитхаб" },
-  // { type: "youtube", value: "", text: "Ютуб" }
+  { type: "youtube", value: "https://www.youtube.com/@rxjsconf", text: "Ютуб" }
 ]

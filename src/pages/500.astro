@@ -1,0 +1,16 @@
+---
+import { Footer, Header } from "../components";
+import Layout from "../layouts/Dumb.astro";
+---
+
+<Layout title="Call for Papper">
+  <Header client:load />
+
+  <main>
+    <div class="wrap">
+      <h2 class="text-4xl font-bold">500 server error</h2>
+    </div>
+  </main>
+
+  <Footer client:idle />
+</Layout>
