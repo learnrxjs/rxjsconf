@@ -1,11 +1,13 @@
-FROM node:18 as builder
+FROM node:18-alpine as builder
 LABEL maintainer="Sam Bulatov<mephistorine@gmail.com>"
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml ./
 
-RUN pnpm ci
+RUN npm i -g pnpm
+
+RUN pnpm install --frozen-lockfile --ignore-scripts
 
 COPY . ./
 

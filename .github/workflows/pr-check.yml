@@ -12,15 +12,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
         with:
-          node-version: '16'
-      - name: Check NodeJS environment
-        run: |
-          echo "node: $( node -v )"
-          echo "pnpm: $( pnpm -v )"
+          version: latest
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: pnpm
       - name: Install dependencies
-        run: pnpm i
+        run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build
         run: npm run build
       - uses: andresz1/size-limit-action@v1
