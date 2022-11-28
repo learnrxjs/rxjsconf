@@ -6,9 +6,7 @@
   "scripts": {
     "start": "wireit",
     "build": "wireit",
-    "preview": "wireit",
-    "ddd": "supabase functions new cfp",
-    "deploy": "supabase functions deploy hello-world --project-ref ysrkaxltbcvxajqnnpdw --no-verify-jwt"
+    "preview": "wireit"
   },
   "wireit": {
     "start": {
@@ -33,7 +31,6 @@
     "tailwindcss": "^3.0.24"
   },
   "devDependencies": {
-    "supabase": "^1.15.1",
     "wireit": "^0.8.0"
   }
 }

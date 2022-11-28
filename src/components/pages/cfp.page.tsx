@@ -2,6 +2,7 @@ import { createEffect, createMemo, createSignal, Match, Show, Switch } from "sol
 import { validate } from "superstruct"
 import { CfpFormValue, CfpSchema } from "../../models"
 import { Portal } from "solid-js/web"
+import { Icon } from "../icon"
 
 type Alert = {
   type: "error" | "success" | "warn"
@@ -10,14 +11,15 @@ type Alert = {
 
 export function CfpPage() {
   const [ alert, showAlert ] = createSignal<Alert | null>(null)
+  const [ isLoading, setIsLoading ] = createSignal(false)
   const [ formValue, setFormValue ] = createSignal<CfpFormValue>({
     firstName: "",
     lastName: "",
     email: "",
-    telegramUrl: null,
-    githubUrl: null,
+    telegramUrl: "",
+    githubUrl: "",
     about: "",
-    talkTitle: null,
+    talkTitle: "",
     talkDesc: ""
   })
 
@@ -34,22 +36,33 @@ export function CfpPage() {
 
   const onClickSubmitButton = () => {
     const value = formValue()
+    
     const [ error, result ] = validate(value, CfpSchema)
     
     if (typeof error === "undefined") {
-      fetch("", result)
+      setIsLoading(true)
+      fetch("https://ysrkaxltbcvxajqnnpdw.functions.supabase.co/cfp", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(result)
+      })
         .then(() => {
           showAlert({
             type: "success",
             message: "Заявка успешно отправлена!"
           })
         })
-        .catch(() => {
+        .catch((error) => {
+          console.error(error)
           showAlert({
             type: "error",
             message: "Ошибка при отправке заявки."
           })
         })
+        .finally(() => setIsLoading(false))
       return
     }
 
@@ -84,7 +97,7 @@ export function CfpPage() {
 
     <p class="mb-2"><span class="text-red-600">*</span> — обязательные поля.</p>
 
-    <p class="mb-2">Если вы обнаружите какие-то ошибки или проблемы, то вы можете <a href="https://github.com/learnrxjs/rxjsconf/issues">создать ишью</a> или написать в телегам <a href="https://t.me/mephistorine">@mephistorine</a>.</p>
+    <p class="mb-2">Если вы обнаружите какие-то ошибки, то вы можете <a href="https://github.com/learnrxjs/rxjsconf/issues">создать ишью</a> или написать в телегам <a href="https://t.me/mephistorine">@mephistorine</a>.</p>
 
     <form class="flex flex-col gap-4 md:max-w-[300px]">
       <div class="form-field-container">
@@ -129,7 +142,16 @@ export function CfpPage() {
       </div>
 
       <div>
-        <button type="button" class="button" onClick={onClickSubmitButton}>Отправить</button>
+        <button type="button" class="button flex items-center gap-2 disabled:cursor-not-allowed" disabled={isLoading()} onClick={onClickSubmitButton}>
+          <Show when={isLoading()}>
+            <div class="w-4"><Icon name="spinner" /></div>
+            <span>Отправляется...</span>
+          </Show>
+
+          <Show when={!isLoading()}>
+            <span>Отправить</span>
+          </Show>
+        </button>
       </div>
     </form>
   </div>
