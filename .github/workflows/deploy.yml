@@ -1,4 +1,4 @@
-name: Deploy mephi.dev site
+name: Deploy RxJS Conf site
 on:
   push:
     branches: [ master ]
