@@ -58,12 +58,13 @@ export const speakers: ReadonlyMap<Speaker["id"], Speaker> = new Map<Speaker["id
     id: "denis-makarov",
     firstName: "Денис",
     lastName: "Макаров",
-    bio: "Senior developer в компании 1inch. Более 6 лет работаю с Angular/RxJS. Увлекаюсь web3, dApp и фронтендом. Пишу про RxJS, когда есть время 🙂 и админю русскоязычный чатик RxJS.",
+    bio: "Senior developer в компании 1inch. Более 6 лет работаю с Angular/RxJS. Увлекаюсь блокчейн технологиями, dApp и фронтендом. Пробую вести канал про web3 разработку. Пишу про RxJS, когда есть время 🙂 и админю русскоязычный чатик RxJS.",
     avatarUrl: "https://ysrkaxltbcvxajqnnpdw.supabase.co/storage/v1/object/public/images/denis-makarov",
     job: "1inch Network",
     socials: [
       { type: "telegram", value: "https://t.me/limitofzero", text: "@limitofzero" },
-      { type: "twitter", value: "https://twitter.com/limitofzero", text: "@limitofzero" }
+      { type: "twitter", value: "https://twitter.com/limitofzero", text: "@limitofzero" },
+      { type: "github", value: "https://github.com/limitofzero", text: "@limitofzero" }
     ]
   })
   .set(UNKNOWN_SPEAKER, {
@@ -77,8 +78,8 @@ export const speakers: ReadonlyMap<Speaker["id"], Speaker> = new Map<Speaker["id
   })
 
 export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
-  .set("rxjs-schedulers", {
-    id: "rxjs-schedulers",
+  .set("sam-bulatov-talk", {
+    id: "sam-bulatov-talk",
     speakerId: "sam-bulatov",
     title: "Шедулеры в RxJS",
     description: `Буду разбирать внутренности того как RxJS работает с асинхронщиной, какие могут встретиться подводные камни и когда их нужно использовать, буду затрагивать тему шуделеров и операторов по типу observeOn. Комбинация опыта работы с RxJS и объяснения внутренной реализации.`,
@@ -88,8 +89,8 @@ export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
   .set("denis-makarov-talk", {
     id: "denis-makarov-talk",
     speakerId: "denis-makarov",
-    title: "┐(￣ヘ￣;)┌",
-    description: "Доклад уточняется...",
+    title: "Готовим безопасный и читаемый RxJS",
+    description: "Затронем темы, которые часто всплывают в сообществе RxJS. Поговорим про вечный вопрос - \"нужна ли отписка?\". Когда вам точно не нужен tap. Как протестировать ваш Observable так, чтобы было не стыдно показать тимлиду.",
     slidesUrl: null,
     videoUrl: null
   })
@@ -109,8 +110,8 @@ export function getSchedule(): readonly Readonly<ScheduleRow>[] {
     {
       type: "TALK",
       time: parseTime("12:10"),
-      talk: talks.get("rxjs-schedulers")!,
-      speaker: speakers.get(talks.get("rxjs-schedulers")!.speakerId)!
+      talk: talks.get("sam-bulatov-talk")!,
+      speaker: speakers.get(talks.get("sam-bulatov-talk")!.speakerId)!
     },
     { type: "BREAK", time: parseTime("12:50"), title: "Перерыв" },
     {
