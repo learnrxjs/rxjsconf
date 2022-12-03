@@ -1,13 +1,14 @@
 ---
 import { Footer,Header } from "../components";
+import { FeedbackPage } from "../components/pages/feedback.page";
 import Layout from "../layouts/Dumb.astro";
 ---
 
-<Layout title="Call for Papper">
+<Layout title="Оставьте фидбек" description="Оставьте нам свой фидбек, чтобы мы стали лучше :)">
   <Header client:load />
 
   <main>
-    <h2>Feedback</h2>
+    <FeedbackPage client:load />
   </main>
 
   <Footer client:idle />
