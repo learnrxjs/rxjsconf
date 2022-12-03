@@ -1,0 +1,16 @@
+---
+import { Footer, Header } from "../../components";
+import Layout from "../../layouts/Dumb.astro";
+import RegistrationPage from "./index"
+const { SUPABASE_KEY, SUPABASE_URL } = import.meta.env
+---
+
+<Layout title="Оставьте фидбек" description="Оставьте нам свой фидбек, чтобы мы стали лучше :)">
+  <Header client:load />
+
+  <main>
+    <RegistrationPage client:load supabaseUrl={ SUPABASE_URL } supabaseKey={ SUPABASE_KEY } />
+  </main>
+
+  <Footer client:idle />
+</Layout>

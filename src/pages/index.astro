@@ -1,6 +1,7 @@
 ---
 import { Footer, Header, Icon } from "../components";
 import Layout from "../layouts/Dumb.astro";
+import Show from "../components/utils/show.astro"
 import { formatScheduleTime, getSpeakerFullName } from "../lib";
 import { getSchedule, Speaker, speakers, UNKNOWN_SPEAKER } from "../static";
 
@@ -35,7 +36,8 @@ const schedule = getSchedule();
             на наш телеграм канал, чтобы быть в курсе всего.
           </p>
 
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col md:flex-row gap-4">
+            <a class="button sm:w-fit justify-center sm:justify-start no-underline" href="/registration">Зарегистрироваться</a>
             <a
               href="https://t.me/rxjsconf"
               class="button sm:w-fit justify-center sm:justify-start no-underline bg-primary hover:bg-primary/70 flex items-center gap-2"
@@ -95,42 +97,40 @@ const schedule = getSchedule();
 
                     <p class="text-base" set:html={row.talk.description} />
 
-                    {row.talk.slidesUrl !== null &&
-                      row.talk.videoUrl !== null && (
-                        <ul class="text-base flex gap-4">
-                          {row.talk.slidesUrl !== null && (
-                            <li>
-                              <a
-                                class="flex items-center gap-1"
-                                target="_blank"
-                                download
-                                href={row.talk.slidesUrl}
-                              >
-                                <div class="w-4">
-                                  <Icon name="pdf" />
-                                </div>
-                                <span>Слайды</span>
-                              </a>
-                            </li>
-                          )}
-                          {row.talk.videoUrl !== null && (
-                            <li>
-                              <a
-                                class="flex items-center gap-1"
-                                target="_blank"
-                                href={row.talk.videoUrl}
-                              >
-                                <div class="w-4">
-                                  <Icon name="youtube" />
-                                </div>
-                                <span>Запись</span>
-                              </a>
-                            </li>
-                          )}
-                        </ul>
-                      )}
-
-                    {false && (
+                    <Show when={ row.talk.slidesUrl !== null || row.talk.videoUrl !== null }>
+                      <ul class="text-base flex gap-4">
+                        <Show when={ row.talk.slidesUrl !== null }>
+                          <li>
+                            <a
+                              class="flex items-center gap-1"
+                              target="_blank"
+                              download
+                              href={ row.talk.slidesUrl }
+                            >
+                              <div class="w-4">
+                                <Icon name="pdf" />
+                              </div>
+                              <span>Слайды</span>
+                            </a>
+                          </li>
+                        </Show>
+                        <Show when={ row.talk.videoUrl !== null }>
+                          <li>
+                            <a
+                              class="flex items-center gap-1"
+                              target="_blank"
+                              href={ row.talk.videoUrl }
+                            >
+                              <div class="w-4">
+                                <Icon name="youtube" />
+                              </div>
+                              <span>Запись</span>
+                            </a>
+                          </li>
+                        </Show>
+                      </ul>
+                    </Show>
+                    <Show when={false}>
                       <a
                         href={`/feedback?type=speaker&id=${row.speaker.id}`}
                         target="_blank"
@@ -138,7 +138,7 @@ const schedule = getSchedule();
                       >
                         Оставить отзыв
                       </a>
-                    )}
+                    </Show>
                   </div>
 
                   {row.speaker.id !== UNKNOWN_SPEAKER && (

@@ -26,14 +26,14 @@ const FeedbackSchema = s.object({
   feedback: s.nonempty(s.string())
 })
 
-async function test() {
+/* async function test() {
   const s = await import("https://esm.sh/@supabase/supabase-js@2")
   const client = s.createClient("https://ysrkaxltbcvxajqnnpdw.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcmtheGx0YmN2eGFqcW5ucGR3Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2OTM5NDU5OSwiZXhwIjoxOTg0OTcwNTk5fQ.IcJ0H8BT__a8mKngvTXnhjn48lgIK2kXrKe-pwe6q4Q")
   const ddd = await client
     .from("feedbacks")
     .select()
   debugger
-}
+} */
 
 export function FeedbackPage() {
   const talks = Array.from(talkMap.values()) 
@@ -43,11 +43,11 @@ export function FeedbackPage() {
   const [ name, setName ] = createSignal<string>("")
   const [ email, setEmail ] = createSignal<string>("")
   const [ talkId, setTalkId ] = createSignal<string>("")
-  const [ rating, setrating ] = createSignal<number>(5)
+  const [ rating, setRating ] = createSignal<number>(5)
   const [ feedback, setFeedback ] = createSignal<string>("")
 
   const onClickSubmitButton = () => {
-    const formValue = {
+    const formValue: Feedback = {
       name: name(),
       email: email(),
       talkId: talkId(),
@@ -76,20 +76,29 @@ export function FeedbackPage() {
       body: JSON.stringify(value)
     })
       .then(
-        (result) => {
-          debugger
-          return showAlert({ type: "success", message: "Отзыв успешно отправлен!" })
-        },
-        (error) => {
-          debugger
-          return showAlert({ type: "error", message: "Ошибка отправки отзыва." })
-        },
+        () => showAlert({ type: "success", message: "Отзыв успешно отправлен!" }),
+        () => showAlert({ type: "error", message: "Ошибка отправки отзыва." }),
       )
       .finally(() => setIsLoading(false))
   }
 
   onMount(() => {
-    console.log(new URL(location.href))
+    const url: URL = new URL(location.href)
+    const handlers: Record<keyof Feedback, any> = {
+      name: setName,
+      email: setEmail,
+      talkId: setTalkId,
+      rating: setRating,
+      feedback: setFeedback
+    }
+    
+    url.searchParams.forEach((value, key) => {
+      const handler = Reflect.get(handlers, key)
+      Reflect.apply(handler, null, [ value ])
+      url.searchParams.delete(key)
+    })
+
+    history.pushState(null, "", url)
   })
 
   createEffect((timoutId: number | null) => {
@@ -144,7 +153,7 @@ export function FeedbackPage() {
           <For each={[ 1, 2, 3, 4, 5 ]}>
             {(ratingValue) => {
               return <label class="flex items-center gap-2 hover:bg-primary/10 p-2 rounded cursor-pointer">
-                <input use:model={ [ rating, (r: any) => setrating(parseFloat(r)) ] } class="accent-primary rounded-full block" type="radio" name="rating" value={ ratingValue } />
+                <input use:model={ [ rating, (r: any) => setRating(parseFloat(r)) ] } class="accent-primary rounded-full block" type="radio" name="rating" value={ ratingValue } />
                 <span>{ ratingValue }</span>
               </label>
             }}
