@@ -1,0 +1,10 @@
+---
+import { CfpPage } from "./cfp"
+import PageLayout from "../../layouts/Page.astro"
+---
+
+<PageLayout title="Call for Papper" description="Если у вас есть какая-то идея для доклада или уже есть что рассказать, то обязательно приходите все обсудим.">
+  <main>
+    <CfpPage client:load />
+  </main>
+</PageLayout>

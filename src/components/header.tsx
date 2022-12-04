@@ -1,8 +1,29 @@
-import { createMemo, createSignal, onCleanup, onMount } from "solid-js"
+import { createMemo, createSignal, onCleanup, onMount, Show } from "solid-js"
+import { getSupabaseClient, setUser, user } from "../lib"
 import { Icon } from "./icon"
 
-export function Header() {
+type Props = {
+  supabaseUrl: string
+  supabaseKey: string
+}
+
+export function Header(props: Props) {
   let headerElementRef: HTMLElement
+  const supabaseClient = getSupabaseClient(props.supabaseUrl, props.supabaseKey)
+  
+  supabaseClient
+    .auth
+    .getSession()
+    .then(({ data, error }) => {
+      if (error) {
+        console.error(error)
+        return
+      }
+
+      if (data.session) {
+        setUser(data.session.user)
+      }
+    })
 
   const [ isOpen, setIsOpen ] = createSignal(false)
   const iconName = createMemo(() => isOpen() ? "close" : "menu")
@@ -19,7 +40,12 @@ export function Header() {
     setIsOpen(false)
   }
 
-  onMount(() => {
+  const onClickLogoutButton = async () => {
+    await supabaseClient.auth.signOut()
+    setUser(null)
+  }
+
+  onMount(async () => {
     document.addEventListener("click", onDocumentClick)
   })
 
@@ -40,7 +66,7 @@ export function Header() {
         </button>
       </div>
 
-      <nav class="text-right lg:text-left lg:block" attr:data-hidden={ !isOpen() }>
+      <nav class="text-right lg:text-left lg:block" classList={{ "hidden": !isOpen() }}>
         <ul class="flex flex-col lg:flex-row gap-4">
           <li>
             <a onClick={ onClickTrigger } href="/#schedule">Расписание</a>
@@ -48,11 +74,23 @@ export function Header() {
           <li>
             <a onClick={ onClickTrigger } href="/#speakers">Докладчики</a>
           </li>
+          <li>
+            <a onClick={ onClickTrigger } href="/cfp">Подать доклад</a>
+          </li>
         </ul>
       </nav>
 
-      <div class="text-right lg:text-left lg:block order-first lg:order-none" attr:data-hidden={ !isOpen() }>
-        <a href="/cfp">Подать доклад</a>
+      <div class="text-right flex md:flex flex-col items-center md:flex-row gap-2 lg:text-left" classList={{ "hidden": !isOpen() }}>
+        <Show when={ user() !== null }>
+          <span>{ user()!.email }</span>
+          <button class="button p-2" onClick={ onClickLogoutButton }>
+            <div class="w-[1em]"><Icon name="logout" /></div>
+          </button>
+        </Show>
+        <Show when={ user() === null }>
+          <a class="button md:py-1 sm:w-fit no-underline bg-primary hover:bg-primary/70" href="/login">Войти</a>
+          <a class="button md:py-1 no-underline" href="/registration">Зарегистрироваться</a>
+        </Show>
       </div>
     </div>
   </header>

@@ -3,7 +3,7 @@ import * as s from "superstruct"
 import { createRenderEffect, Signal } from "solid-js"
 import { Portal } from "solid-js/web"
 import { talks as talkMap } from "../../static"
-import { Icon } from "../icon"
+import { Icon } from "../../components/icon"
 
 type Alert = {
   type: "error" | "success" | "warn"

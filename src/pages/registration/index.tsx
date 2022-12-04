@@ -1,10 +1,10 @@
-import { createClient, SupabaseClient } from "@supabase/supabase-js"
+import type { SupabaseClient } from "@supabase/supabase-js"
 import { createEffect, createMemo, createSignal, Show } from "solid-js"
 import { createStore } from "solid-js/store"
 import { Portal } from "solid-js/web"
 import * as s from "superstruct"
 import { Alert } from "../../components"
-import { email } from "../../lib"
+import { email, getSupabaseClient } from "../../lib"
 import type { AlertMessage } from "../../models"
 
 type Props = {
@@ -62,7 +62,7 @@ export default function RegistrationPage(props: Props) {
     name: ""
   })
 
-  const client: SupabaseClient = createClient(props.supabaseUrl, props.supabaseKey)
+  const client: SupabaseClient = getSupabaseClient(props.supabaseUrl, props.supabaseKey)
   
   async function onClickRegisterButton() {
     if (isLoading()) {

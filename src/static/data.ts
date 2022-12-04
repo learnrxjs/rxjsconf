@@ -25,7 +25,6 @@ export type Talk = {
   description: string
   slidesUrl: string | null
   videoUrl: string | null
-  feedBackUrl: string | null
 }
 
 export type BreakScheduleRow = {
@@ -85,8 +84,7 @@ export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
     title: "Шедулеры в RxJS",
     description: `Буду разбирать внутренности того как RxJS работает с асинхронщиной, какие могут встретиться подводные камни и когда их нужно использовать, буду затрагивать тему шуделеров и операторов по типу observeOn. Комбинация опыта работы с RxJS и объяснения внутренной реализации.`,
     slidesUrl: null,
-    videoUrl: null,
-    feedBackUrl: "/feedback"
+    videoUrl: null
   })
   .set("denis-makarov-talk", {
     id: "denis-makarov-talk",
@@ -94,8 +92,7 @@ export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
     title: "Готовим безопасный и читаемый RxJS",
     description: "Затронем темы, которые часто всплывают в сообществе RxJS. Поговорим про вечный вопрос - \"нужна ли отписка?\". Когда вам точно не нужен tap. Как протестировать ваш Observable так, чтобы было не стыдно показать тимлиду.",
     slidesUrl: null,
-    videoUrl: null,
-    feedBackUrl: null
+    videoUrl: null
   })
   .set("unknown-talk", {
     id: "unknown-talk",
@@ -103,8 +100,7 @@ export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
     title: "┐(￣ヘ￣;)┌",
     description: "Доклад уточняется...",
     slidesUrl: null,
-    videoUrl: null,
-    feedBackUrl: null
+    videoUrl: null
   })
 
 export function getSchedule(): readonly Readonly<ScheduleRow>[] {
@@ -141,3 +137,8 @@ export const SITE_SOCIALS: readonly Readonly<SpeakerSocial>[] = [
   { type: "github", value: "https://github.com/learnrxjs", text: "Гитхаб" },
   { type: "youtube", value: "https://www.youtube.com/@rxjsconf", text: "Ютуб" }
 ]
+
+export const SITE_SETTINGS = {
+  youtubeVideoId: null,
+  showFeedbacks: false
+}

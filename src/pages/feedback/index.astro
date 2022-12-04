@@ -1,11 +1,10 @@
 ---
 import PageLayout from "../../layouts/Page.astro"
-import RegistrationPage from "./index"
-const { SUPABASE_KEY, SUPABASE_URL } = import.meta.env
+import { FeedbackPage } from "./feedback"
 ---
 
 <PageLayout title="Оставьте фидбек" description="Оставьте нам свой фидбек, чтобы мы стали лучше :)">
   <main>
-    <RegistrationPage client:load supabaseUrl={ SUPABASE_URL } supabaseKey={ SUPABASE_KEY } />
+    <FeedbackPage client:load />
   </main>
 </PageLayout>
