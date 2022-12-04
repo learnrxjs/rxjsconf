@@ -11,7 +11,7 @@ RUN pnpm install --frozen-lockfile --ignore-scripts
 
 COPY . ./
 
-RUN pnpm run build
+RUN SUPABASE_URL=$(echo $SUPABASE_URL) SUPABASE_KEY=$(echo $SUPABASE_KEY) pnpm run build
 
 FROM nginx:alpine
 
