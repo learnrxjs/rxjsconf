@@ -1,5 +1,7 @@
 # RxJS Conf
 
+[![deploy](https://github.com/learnrxjs/rxjsconf/actions/workflows/deploy.yml/badge.svg)](https://github.com/learnrxjs/rxjsconf/actions/workflows/deploy.yml)
+
 [Сайт](https://rxjsconf.ru) • [Докладчики](https://rxjsconf.ru/#speakers) • [Доклады](https://rxjsconf.ru/#talks) • [Подать доклад](https://rxjsconf.ru/cfp)
 
 [![](/misc/readme/readme-demo.png)](https://rxjsconf.ru)

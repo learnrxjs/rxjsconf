@@ -1,4 +1,4 @@
-name: Deploy RxJS Conf site
+name: deploy
 on:
   push:
     branches: [ master ]
