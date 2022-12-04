@@ -4,7 +4,7 @@ import LoginPage from "./login"
 const { SUPABASE_KEY, SUPABASE_URL } = import.meta.env
 ---
 
-<PageLayout title="Оставьте фидбек" description="Оставьте нам свой фидбек, чтобы мы стали лучше :)">
+<PageLayout title="Авторизация" description="Страница авторизации">
   <main>
     <LoginPage client:load supabaseUrl={ SUPABASE_URL } supabaseKey={ SUPABASE_KEY } />
   </main>
