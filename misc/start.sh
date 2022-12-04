@@ -16,8 +16,11 @@ docker kill rxjsconf
 echo "Уничтожение контейнера"
 docker rm rxjsconf --volumes
 
+echo "Переменные окружения"
+export $(grep -v '^#' ../.env | xargs -0)
+
 echo "Начинаем сборку"
-docker build --tag rxjsconf .
+docker build --build-arg SUPABASE_URL --build-arg SUPABASE_KEY --tag rxjsconf .
 
 echo "Запускаем контейнер"
-docker run --name rxjsconf --env-file ./../.env --publish 80:80 --publish 443:443 --detach rxjsconf
+docker run --name rxjsconf --publish 80:80 --publish 443:443 --detach rxjsconf
