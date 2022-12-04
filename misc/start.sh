@@ -22,8 +22,7 @@ docker build --tag rxjsconf .
 echo "Запускаем контейнер"
 docker run \
   --name rxjsconf \
-  -e SUPABASE_URL=$SUPABASE_URL
-  -e SUPABASE_KEY=$SUPABASE_KEY
+  --env-file ./.env
   --publish 80:80 \
   --publish 443:443 \
   --detach \
