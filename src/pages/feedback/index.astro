@@ -1,0 +1,10 @@
+---
+import PageLayout from "../../layouts/Page.astro"
+import { FeedbackPage } from "./feedback"
+---
+
+<PageLayout title="Оставьте фидбек" description="Оставьте нам свой фидбек, чтобы мы стали лучше :)">
+  <main>
+    <FeedbackPage client:load />
+  </main>
+</PageLayout>

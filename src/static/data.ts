@@ -137,3 +137,8 @@ export const SITE_SOCIALS: readonly Readonly<SpeakerSocial>[] = [
   { type: "github", value: "https://github.com/learnrxjs", text: "Гитхаб" },
   { type: "youtube", value: "https://www.youtube.com/@rxjsconf", text: "Ютуб" }
 ]
+
+export const SITE_SETTINGS = {
+  youtubeVideoId: null,
+  showFeedbacks: false
+}

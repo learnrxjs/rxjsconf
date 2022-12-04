@@ -1,0 +1,22 @@
+---
+import { Footer, Header } from "../components";
+import Dumb from "./Dumb.astro";
+
+type Props = {
+  title: string
+  description?: string
+}
+
+const { SUPABASE_KEY, SUPABASE_URL } = import.meta.env
+const { title, description } = Astro.props as Props
+---
+
+<Dumb title={ title } description={ description }>
+  <Header supabaseKey={ SUPABASE_KEY } supabaseUrl={ SUPABASE_URL } client:load />
+
+  <main>
+    <slot />
+  </main>
+
+  <Footer client:idle />
+</Dumb>

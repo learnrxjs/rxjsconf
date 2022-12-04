@@ -12,4 +12,4 @@ jobs:
         host: ${{ secrets.RXJS_CONF_HOST }}
         username: ${{ secrets.RXJS_CONF_USER }}
         key: ${{ secrets.RXJS_CONF_DEPLOY_PRIVATE_SSH }}
-        script: "curl https://raw.githubusercontent.com/learnrxjs/rxjsconf/master/misc/start.sh | bash"
+        script: "export SUPABASE_URL=${{ secrets.SUPABASE_URL }} && export SUPABASE_KEY=${{ secrets.SUPABASE_KEY }} && curl https://raw.githubusercontent.com/learnrxjs/rxjsconf/master/misc/start.sh | bash"

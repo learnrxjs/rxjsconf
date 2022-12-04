@@ -1,0 +1,11 @@
+---
+import PageLayout from "../../layouts/Page.astro"
+import LoginPage from "./login"
+const { SUPABASE_KEY, SUPABASE_URL } = import.meta.env
+---
+
+<PageLayout title="Оставьте фидбек" description="Оставьте нам свой фидбек, чтобы мы стали лучше :)">
+  <main>
+    <LoginPage client:load supabaseUrl={ SUPABASE_URL } supabaseKey={ SUPABASE_KEY } />
+  </main>
+</PageLayout>

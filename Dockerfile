@@ -11,7 +11,7 @@ RUN pnpm install --frozen-lockfile --ignore-scripts
 
 COPY . ./
 
-RUN npm run build
+RUN pnpm run build
 
 FROM nginx:alpine
 

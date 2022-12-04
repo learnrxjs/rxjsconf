@@ -1,0 +1,7 @@
+---
+type Props = {
+  when: boolean
+}
+const { when } = Astro.props as Props
+---
+{ when && <slot /> }

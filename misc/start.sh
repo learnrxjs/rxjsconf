@@ -20,4 +20,11 @@ echo "Начинаем сборку"
 docker build --tag rxjsconf .
 
 echo "Запускаем контейнер"
-docker run --name rxjsconf --publish 80:80 --publish 443:443 --detach rxjsconf
+docker run \
+  --name rxjsconf \
+  -e SUPABASE_URL=$SUPABASE_URL
+  -e SUPABASE_KEY=$SUPABASE_KEY
+  --publish 80:80 \
+  --publish 443:443 \
+  --detach \
+  rxjsconf
