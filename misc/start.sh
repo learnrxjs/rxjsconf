@@ -25,5 +25,4 @@ docker run \
   --env-file ./.env
   --publish 80:80 \
   --publish 443:443 \
-  --detach \
-  rxjsconf
+  --detach rxjsconf
