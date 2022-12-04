@@ -25,7 +25,3 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build
         run: SUPABASE_URL=${{ secrets.SUPABASE_URL }} SUPABASE_KEY=${{ secrets.SUPABASE_KEY }} pnpm run build
-      - uses: andresz1/size-limit-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          skip_step: build
