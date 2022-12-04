@@ -20,9 +20,4 @@ echo "Начинаем сборку"
 docker build --tag rxjsconf .
 
 echo "Запускаем контейнер"
-docker run \
-  --name rxjsconf \
-  --env-file ./../.env \
-  --publish 80:80 \
-  --publish 443:443 \
-  --detach rxjsconf
+docker run --name rxjsconf --env-file ./../.env --publish 80:80 --publish 443:443 --detach rxjsconf
