@@ -14,7 +14,7 @@ type Props = {
 
 const RegistrationFormSchema = s.object({
   email: s.nonempty(email()),
-  password: s.nonempty(s.size(s.string(), 6)),
+  password: s.nonempty(s.size(s.string(), 6, Infinity)),
   name: s.string()
 })
 
@@ -71,10 +71,13 @@ export default function RegistrationPage(props: Props) {
 
     const form = {
       email: formValue.email,
-      password: formValue.password
+      password: formValue.password,
+      name: formValue.name
     }
 
-    const [ isValid ] = validate(form, RegistrationFormSchema)
+    const [ isValid, error ] = validate(form, RegistrationFormSchema)
+    
+    console.error(error)
 
     if (!isValid) {
       setAlert({

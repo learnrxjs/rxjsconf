@@ -67,6 +67,17 @@ export const speakers: ReadonlyMap<Speaker["id"], Speaker> = new Map<Speaker["id
       { type: "github", value: "https://github.com/limitofzero", text: "@limitofzero" }
     ]
   })
+  .set("alex-inkin", {
+    id: "alex-inkin",
+    firstName: "Александр",
+    lastName: "Инкин",
+    bio: "Александр — увлечённый Angular-разработчик, который всегда старается докопаться до сути. Начав карьеру с вёрстки, до сих пор считается грозой бесполезных вложенных DIV'ов. Последние несколько лет занимается разработкой библиотеки компонентов Taiga UI в Tinkoff, которая радует разработчиков и пользователей своим удобством. Много пишет про свой любимый фреймворк, рассказывая про свои находки и разработки, активный автор open source-проектов, Google Developer Expert, композитор и киноман.",
+    avatarUrl: "https://ysrkaxltbcvxajqnnpdw.supabase.co/storage/v1/object/public/images/alex-inkin",
+    job: "Tinkoff",
+    socials: [
+      { type: "twitter", value: "https://twitter.com/Waterplea", text: "@Waterplea" },
+    ]
+  })
   .set(UNKNOWN_SPEAKER, {
     id: UNKNOWN_SPEAKER,
     firstName: "(￣▽￣)ノ",
@@ -91,6 +102,22 @@ export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
     speakerId: "denis-makarov",
     title: "Готовим безопасный и читаемый RxJS",
     description: "Затронем темы, которые часто всплывают в сообществе RxJS. Поговорим про вечный вопрос - \"нужна ли отписка?\". Когда вам точно не нужен tap. Как протестировать ваш Observable так, чтобы было не стыдно показать тимлиду.",
+    slidesUrl: null,
+    videoUrl: null
+  })
+  .set("alex-inkin-talk", {
+    id: "alex-inkin-talk",
+    speakerId: "alex-inkin",
+    title: "«Область взаимодействия пользователя» — пойдёт название такое?",
+    description: `<p>Приложению нужно понимать, с какой областью взаимодействует пользователь. Это важно как для доступности и работы с фокусом, так и для банального закрытия выпадающих списков. Несмотря на кажущуюся простоту задачи, для её реализации потребуется хорошенько разобраться в механизмах DOM и работы событий. Мы рассмотрим:</p>
+      <ul>
+        <li>Нативные события и их поведение</li>
+        <li>DOM элементы в динамике</li>
+        <li>Shadow DOM и его особенности</li>
+        <li>корнер кейсы и особенности браузеров</li>
+        <li>RxJS реализацию задачи</li>
+        <li>применение в Angular</li>
+      </ul>`,
     slidesUrl: null,
     videoUrl: null
   })
@@ -124,8 +151,8 @@ export function getSchedule(): readonly Readonly<ScheduleRow>[] {
     {
       type: "TALK",
       time: parseTime("13:50"),
-      talk: talks.get("unknown-talk")!,
-      speaker: speakers.get(talks.get("unknown-talk")!.speakerId)!
+      talk: talks.get("alex-inkin-talk")!,
+      speaker: speakers.get(talks.get("alex-inkin-talk")!.speakerId)!
     },
     { type: "BREAK", time: parseTime("14:30"), title: "Закрытие" }
   ]
