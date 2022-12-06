@@ -58,6 +58,14 @@
   .alert[data-alert-type="warn"] {
     @apply bg-yellow-400 text-black
   }
+
+  .formatted-text p {
+    @apply my-2
+  }
+
+  .formatted-text ul {
+    @apply pl-4 list-disc
+  }
 }
 
 .wrap {

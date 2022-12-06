@@ -102,7 +102,7 @@ export default function MainPage() {
                       <a class="no-underline text-gray-400" href={ `/#${ row.talk.id }` }>#</a>
                     </h3>
 
-                    <p class="text-base" innerHTML={row.talk.description} />
+                    <div class="text-base formatted-text" innerHTML={row.talk.description} />
 
                     <Show when={ isShowTalkActions(row) }>
                       <ul class="text-base flex gap-4">
