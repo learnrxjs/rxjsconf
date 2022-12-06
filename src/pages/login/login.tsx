@@ -42,7 +42,9 @@ export default function LoginPage(props: Props) {
     otp: ""
   })
 
-  async function onClickSubmit() {
+  async function submitFormHandler(event: Event) {
+    event.preventDefault();
+
     if (isLoading()) {
       return
     }
@@ -98,7 +100,7 @@ export default function LoginPage(props: Props) {
   return <div class="wrap flex flex-col gap-4">
     <h2 class="text-4xl font-bold">Авторизация</h2>
 
-    <form class="flex flex-col gap-4 md:max-w-[300px]">
+    <form class="flex flex-col gap-4 md:max-w-[300px]" onSubmit={submitFormHandler}>
       <div class="form-field-container">
         <label class="label" for="email">Email<span class="text-red-600">*</span></label>
         <input class="input" id="email" type="email" name="email" autocomplete="on" required onInput={ createOnInputHandler("email") } />
@@ -112,7 +114,7 @@ export default function LoginPage(props: Props) {
       </Show>
     </form>
 
-    <button class="button w-fit md:max-w-[300px]" onClick={onClickSubmit} disabled={ isLoading() }>
+    <button type="submit" class="button w-fit md:max-w-[300px]" disabled={ isLoading() }>
       <Show when={ !isLoading() } fallback={ <>Загрузка...</> }>
         <Show when={ optSent() } fallback={ <>Продолжить</> }>Войти</Show>
       </Show>

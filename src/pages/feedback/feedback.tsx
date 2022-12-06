@@ -46,7 +46,9 @@ export function FeedbackPage() {
   const [ rating, setRating ] = createSignal<number>(5)
   const [ feedback, setFeedback ] = createSignal<string>("")
 
-  const onClickSubmitButton = () => {
+  const submitFormHandler = (event: Event) => {
+    event.preventDefault();
+
     const formValue: Feedback = {
       name: name(),
       email: email(),
@@ -128,7 +130,7 @@ export function FeedbackPage() {
 
     <p class="mb-2">Если вы обнаружите какие-то ошибки, то вы можете <a href="https://github.com/learnrxjs/rxjsconf/issues">создать ишью</a> или написать в телегам <a href="https://t.me/mephistorine">@mephistorine</a>.</p>
 
-    <form class="flex flex-col gap-4 md:max-w-[300px]">
+    <form class="flex flex-col gap-4 md:max-w-[300px]" onSubmit={submitFormHandler}>
       <div class="form-field-container">
         <label class="label" for="talk-name">Доклад<span class="text-red-600">*</span></label>
         <select use:model={ [ talkId, setTalkId ] } class="input" name="talk_name" id="talk-name">
@@ -167,7 +169,7 @@ export function FeedbackPage() {
       </div>
 
       <div>
-        <button type="button" class="button flex items-center gap-2 disabled:cursor-not-allowed" disabled={ isLoading() } onClick={ onClickSubmitButton }>
+        <button type="submit" class="button flex items-center gap-2 disabled:cursor-not-allowed" disabled={ isLoading() }>
           <Show when={ isLoading() }>
             <div class="w-4"><Icon name="spinner" /></div>
             <span>Отправляется...</span>

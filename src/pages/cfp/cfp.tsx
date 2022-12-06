@@ -34,7 +34,9 @@ export function CfpPage() {
     }
   }
 
-  const onClickSubmitButton = () => {
+  const submitFormHandler = (event: Event) => {
+    event.preventDefault();
+
     const value = formValue()
     
     const [ error, result ] = validate(value, CfpSchema)
@@ -99,7 +101,7 @@ export function CfpPage() {
 
     <p class="mb-2">Если вы обнаружите какие-то ошибки, то вы можете <a href="https://github.com/learnrxjs/rxjsconf/issues">создать ишью</a> или написать в телегам <a href="https://t.me/mephistorine">@mephistorine</a>.</p>
 
-    <form class="flex flex-col gap-4 md:max-w-[300px]">
+    <form class="flex flex-col gap-4 md:max-w-[300px]" onSubmit={submitFormHandler}>
       <div class="form-field-container">
         <label class="label" for="first_name">Имя<span class="text-red-600">*</span></label>
         <input class="input" id="first_name" type="text" name="name_first" required onInput={ createOnInput("firstName") } />
@@ -142,7 +144,7 @@ export function CfpPage() {
       </div>
 
       <div>
-        <button type="button" class="button flex items-center gap-2 disabled:cursor-not-allowed" disabled={isLoading()} onClick={onClickSubmitButton}>
+        <button type="submit" class="button flex items-center gap-2 disabled:cursor-not-allowed" disabled={isLoading()}>
           <Show when={isLoading()}>
             <div class="w-4"><Icon name="spinner" /></div>
             <span>Отправляется...</span>
