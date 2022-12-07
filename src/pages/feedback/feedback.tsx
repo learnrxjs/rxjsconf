@@ -130,7 +130,7 @@ export function FeedbackPage() {
 
     <p class="mb-2">Если вы обнаружите какие-то ошибки, то вы можете <a href="https://github.com/learnrxjs/rxjsconf/issues">создать ишью</a> или написать в телегам <a href="https://t.me/mephistorine">@mephistorine</a>.</p>
 
-    <form class="flex flex-col gap-4 md:max-w-[300px]" onSubmit={submitFormHandler}>
+    <form class="flex flex-col gap-4 md:max-w-[300px]" onSubmit={ onSubmitForm }>
       <div class="form-field-container">
         <label class="label" for="talk-name">Доклад<span class="text-red-600">*</span></label>
         <select use:model={ [ talkId, setTalkId ] } class="input" name="talk_name" id="talk-name">
