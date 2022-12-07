@@ -42,7 +42,7 @@ export default function LoginPage(props: Props) {
     otp: ""
   })
 
-  async function submitFormHandler(event: Event) {
+  async function onSubmitForm(event: Event) {
     event.preventDefault();
 
     if (isLoading()) {
