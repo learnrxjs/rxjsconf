@@ -46,7 +46,7 @@ export function FeedbackPage() {
   const [ rating, setRating ] = createSignal<number>(5)
   const [ feedback, setFeedback ] = createSignal<string>("")
 
-  const submitFormHandler = (event: Event) => {
+  const onSubmitForm = (event: Event) => {
     event.preventDefault();
 
     const formValue: Feedback = {
