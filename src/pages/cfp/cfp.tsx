@@ -101,7 +101,7 @@ export function CfpPage() {
 
     <p class="mb-2">Если вы обнаружите какие-то ошибки, то вы можете <a href="https://github.com/learnrxjs/rxjsconf/issues">создать ишью</a> или написать в телегам <a href="https://t.me/mephistorine">@mephistorine</a>.</p>
 
-    <form class="flex flex-col gap-4 md:max-w-[300px]" onSubmit={submitFormHandler}>
+    <form class="flex flex-col gap-4 md:max-w-[300px]" onSubmit={ onSubmitForm }>
       <div class="form-field-container">
         <label class="label" for="first_name">Имя<span class="text-red-600">*</span></label>
         <input class="input" id="first_name" type="text" name="name_first" required onInput={ createOnInput("firstName") } />
