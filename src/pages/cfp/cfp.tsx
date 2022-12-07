@@ -34,7 +34,7 @@ export function CfpPage() {
     }
   }
 
-  const submitFormHandler = (event: Event) => {
+  const onSubmitForm = (event: Event) => {
     event.preventDefault();
 
     const value = formValue()
