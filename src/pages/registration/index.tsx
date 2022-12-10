@@ -129,7 +129,7 @@ export default function RegistrationPage(props: Props) {
   return <div class="wrap flex flex-col gap-4">
     <h2 class="text-4xl font-bold">Регистрация</h2>
     
-    <form class="flex flex-col gap-4 md:max-w-[300px]">
+    <form id="registration-form" class="flex flex-col gap-4 md:max-w-[300px]">
       <div class="form-field-container">
         <label class="label" for="email">Email<span class="text-red-600">*</span></label>
         <input class="input" id="email" type="email" name="email" required onInput={ createOnInputHandler("email") } />

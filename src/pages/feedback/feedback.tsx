@@ -26,15 +26,6 @@ const FeedbackSchema = s.object({
   feedback: s.nonempty(s.string())
 })
 
-/* async function test() {
-  const s = await import("https://esm.sh/@supabase/supabase-js@2")
-  const client = s.createClient("https://ysrkaxltbcvxajqnnpdw.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlzcmtheGx0YmN2eGFqcW5ucGR3Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY2OTM5NDU5OSwiZXhwIjoxOTg0OTcwNTk5fQ.IcJ0H8BT__a8mKngvTXnhjn48lgIK2kXrKe-pwe6q4Q")
-  const ddd = await client
-    .from("feedbacks")
-    .select()
-  debugger
-} */
-
 export function FeedbackPage() {
   const talks = Array.from(talkMap.values()) 
   const [ alert, showAlert ] = createSignal<Alert | null>(null)
