@@ -94,16 +94,16 @@ export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
     speakerId: "sam-bulatov",
     title: "Шедулеры в RxJS",
     description: `Буду разбирать внутренности того как RxJS работает с асинхронщиной, какие могут встретиться подводные камни и когда их нужно использовать, буду затрагивать тему шуделеров и операторов по типу observeOn. Комбинация опыта работы с RxJS и объяснения внутренной реализации.`,
-    slidesUrl: null,
-    videoUrl: null
+    slidesUrl: "https://mephi.dev/rxcnf",
+    videoUrl: "https://www.youtube.com/watch?v=012hWR7Xuas&t=6840s"
   })
   .set("denis-makarov-talk", {
     id: "denis-makarov-talk",
     speakerId: "denis-makarov",
     title: "Готовим безопасный и читаемый RxJS",
     description: "Затронем темы, которые часто всплывают в сообществе RxJS. Поговорим про вечный вопрос - \"нужна ли отписка?\". Когда вам точно не нужен tap. Как протестировать ваш Observable так, чтобы было не стыдно показать тимлиду.",
-    slidesUrl: null,
-    videoUrl: null
+    slidesUrl: "https://ysrkaxltbcvxajqnnpdw.supabase.co/storage/v1/object/public/files/denis-makarov.pdf",
+    videoUrl: "https://www.youtube.com/watch?v=012hWR7Xuas&t=930s"
   })
   .set("alex-inkin-talk", {
     id: "alex-inkin-talk",
@@ -118,8 +118,8 @@ export const talks: ReadonlyMap<Talk["id"], Talk> = new Map<Talk["id"], Talk>()
         <li>RxJS реализацию задачи</li>
         <li>применение в Angular</li>
       </ul>`,
-    slidesUrl: null,
-    videoUrl: null
+    slidesUrl: "https://ysrkaxltbcvxajqnnpdw.supabase.co/storage/v1/object/public/files/alex-inkin.pdf",
+    videoUrl: "https://www.youtube.com/watch?v=012hWR7Xuas&t=4560s"
   })
   .set("unknown-talk", {
     id: "unknown-talk",

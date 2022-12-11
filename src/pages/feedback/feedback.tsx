@@ -27,7 +27,7 @@ const FeedbackSchema = s.object({
 })
 
 export function FeedbackPage() {
-  const talks = Array.from(talkMap.values()) 
+  const talks = Array.from(talkMap.values()).filter((talk) => talk.id !== "unknown-talk")
   const [ alert, showAlert ] = createSignal<Alert | null>(null)
   const [ isLoading, setIsLoading ] = createSignal<boolean>(false)
 
