@@ -47,7 +47,7 @@ export const speakers: ReadonlyMap<Speaker["id"], Speaker> = new Map<Speaker["id
     lastName: "Булатов",
     bio: `Ведущий фронт в <a target="_blank" href="https://waliot.com">Waliot</a> из Краснодара, организует мероприятия krd.dev. Любит Angular и участвует в OSS, переводит документацию RxJS на русский язык, участник подкаста NgRuAir. Фанатеет по аниме и манге.`,
     avatarUrl: "https://ysrkaxltbcvxajqnnpdw.supabase.co/storage/v1/object/public/images/sam-bulatov",
-    job: "Waliot, krd.dev",
+    job: "<a href='https://waliot.com'>Waliot</a>, <a href='https://krd.dev'>krd.dev</a>",
     socials: [
       { type: "telegram", value: "https://t.me/mephistorine", text: "@mephistorine" },
       { type: "twitter", value: "https://twitter.com/mephistorine", text: "@mephistorine" },
@@ -60,7 +60,7 @@ export const speakers: ReadonlyMap<Speaker["id"], Speaker> = new Map<Speaker["id
     lastName: "Макаров",
     bio: "Senior developer в компании 1inch. Более 6 лет работаю с Angular/RxJS. Увлекаюсь блокчейн технологиями, dApp и фронтендом. Пробую вести канал про web3 разработку. Пишу про RxJS, когда есть время 🙂 и админю русскоязычный чатик RxJS.",
     avatarUrl: "https://ysrkaxltbcvxajqnnpdw.supabase.co/storage/v1/object/public/images/denis-makarov",
-    job: "1inch Network",
+    job: "<a href='https://1inch.io/'>1inch Network</a>",
     socials: [
       { type: "telegram", value: "https://t.me/limitofzero", text: "@limitofzero" },
       { type: "twitter", value: "https://twitter.com/limitofzero", text: "@limitofzero" },
@@ -73,7 +73,7 @@ export const speakers: ReadonlyMap<Speaker["id"], Speaker> = new Map<Speaker["id
     lastName: "Инкин",
     bio: "Александр — увлечённый Angular-разработчик, который всегда старается докопаться до сути. Начав карьеру с вёрстки, до сих пор считается грозой бесполезных вложенных DIV'ов. Последние несколько лет занимается разработкой библиотеки компонентов Taiga UI в Tinkoff, которая радует разработчиков и пользователей своим удобством. Много пишет про свой любимый фреймворк, рассказывая про свои находки и разработки, активный автор open source-проектов, Google Developer Expert, композитор и киноман.",
     avatarUrl: "https://ysrkaxltbcvxajqnnpdw.supabase.co/storage/v1/object/public/images/alex-inkin",
-    job: "Tinkoff",
+    job: "<a href='https://tinkoff.ru/'>Tinkoff</a>",
     socials: [
       { type: "twitter", value: "https://twitter.com/Waterplea", text: "@Waterplea" },
     ]
@@ -137,22 +137,22 @@ export function getSchedule(): readonly Readonly<ScheduleRow>[] {
     {
       type: "TALK",
       time: parseTime("12:10"),
-      talk: talks.get("sam-bulatov-talk")!,
-      speaker: speakers.get(talks.get("sam-bulatov-talk")!.speakerId)!
+      talk: talks.get("denis-makarov-talk")!,
+      speaker: speakers.get(talks.get("denis-makarov-talk")!.speakerId)!
     },
     { type: "BREAK", time: parseTime("12:50"), title: "Перерыв" },
     {
       type: "TALK",
       time: parseTime("13:00"),
-      talk: talks.get("denis-makarov-talk")!,
-      speaker: speakers.get(talks.get("denis-makarov-talk")!.speakerId)!
+      talk: talks.get("alex-inkin-talk")!,
+      speaker: speakers.get(talks.get("alex-inkin-talk")!.speakerId)!
     },
     { type: "BREAK", time: parseTime("13:40"), title: "Перерыв" },
     {
       type: "TALK",
       time: parseTime("13:50"),
-      talk: talks.get("alex-inkin-talk")!,
-      speaker: speakers.get(talks.get("alex-inkin-talk")!.speakerId)!
+      talk: talks.get("sam-bulatov-talk")!,
+      speaker: speakers.get(talks.get("sam-bulatov-talk")!.speakerId)!
     },
     { type: "BREAK", time: parseTime("14:30"), title: "Закрытие" }
   ]
@@ -166,6 +166,6 @@ export const SITE_SOCIALS: readonly Readonly<SpeakerSocial>[] = [
 ]
 
 export const SITE_SETTINGS = {
-  youtubeVideoId: null,
+  youtubeVideoId: "012hWR7Xuas",
   showFeedbacks: false
 }

@@ -157,7 +157,7 @@ export default function MainPage() {
                             {getSpeakerFullName(row.speaker)}
                           </a>
                         </p>
-                        <p class="text-black/50 text-sm">{row.speaker.job}</p>
+                        <div class="text-black/50 text-sm" innerHTML={row.speaker.job}></div>
                       </div>
                     </div>
                   )}
@@ -210,7 +210,7 @@ export default function MainPage() {
                       <h3 id={speaker.id} class="text-2xl font-bold">
                         {getSpeakerFullName(speaker)}
                       </h3>
-                      <p class="text-black/50">{speaker.job}</p>
+                      <div class="text-black/50" innerHTML={speaker.job}></div>
                       <p innerHTML={speaker.bio} />
 
                       {speaker.socials.length > 0 && (
