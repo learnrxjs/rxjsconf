@@ -167,5 +167,5 @@ export const SITE_SOCIALS: readonly Readonly<SpeakerSocial>[] = [
 
 export const SITE_SETTINGS = {
   youtubeVideoId: "012hWR7Xuas",
-  showFeedbacks: false
+  showFeedbacks: true
 }
